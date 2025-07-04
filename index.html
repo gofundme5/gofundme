@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prayers and donations for Sophia - GoFundMe </title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+    a {
+      color: #007aef;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background: white;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #00b074;
+      text-decoration: none;
+    }
+    nav {
+      display: flex;
+      gap: 15px;
+      font-size: 0.9rem;
+    }
+    nav a {
+      color: #555;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #00b074;
+    }
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+    .campaign-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .campaign-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .organizer-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .organizer-info svg {
+      width: 20px;
+      height: 20px;
+      fill: #555;
+    }
+    .donation-protected {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #dff6e1;
+      color: #2a7a2a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .donation-protected svg {
+      width: 16px;
+      height: 16px;
+      fill: #2a7a2a;
+    }
+    .story {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .donation-panel {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      max-width: 350px;
+      margin-left: auto;
+    }
+    .donation-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #222;
+    }
+    .donation-stats .raised {
+      color: #00b074;
+    }
+    .donation-stats .goal {
+      color: #888;
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-decoration: line-through;
+    }
+    .progress-circle {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+    }
+    .progress-circle svg {
+      transform: rotate(-90deg);
+      width: 60px;
+      height: 60px;
+    }
+    .progress-circle circle {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+    .progress-circle .bg {
+      stroke: #eee;
+    }
+    .progress-circle .progress {
+      stroke: #00b074;
+      stroke-dasharray: 188.4;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 700;
+      font-size: 1rem;
+      color: #00b074;
+    }
+    .donation-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .btn {
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-share {
+      background-color: #f7b731;
+      color: #fff;
+    }
+    .btn-share:hover {
+      background-color: #d9a31a;
+    }
+    .btn-donate {
+      background: linear-gradient(180deg, #f7b731 0%, #f7931e 100%);
+      color: #fff;
+    }
+    .btn-donate:hover {
+      background: linear-gradient(180deg, #d9a31a 0%, #c67e00 100%);
+    }
+    .recent-donations {
+      margin-top: 25px;
+    }
+    .recent-donations a {
+      color: #7a2aff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    .donor-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+    .donor-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+      color: #444;
+    }
+    .donor-icon {
+      width: 24px;
+      height: 24px;
+      fill: #888;
+      flex-shrink: 0;
+    }
+    .donor-name {
+      flex-grow: 1;
+    }
+    .donation-amount {
+      font-weight: 700;
+      color: #222;
+    }
+    .donation-time {
+      font-size: 0.8rem;
+      color: #888;
+      margin-left: 10px;
+    }
+    .container-flex {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    @media (max-width: 900px) {
+      .container-flex {
+        flex-direction: column;
+      }
+      .donation-panel {
+        max-width: 100%;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="logo" aria-label="GoFundMe Home">gofundme</a>
+    <nav aria-label="Primary navigation">
+      <a href="#">Search</a>
+      <a href="donate.html">Donate</a>
+      
+      <a href="about.html">About</a>
+     
+      <a href="#" class="btn btn-donate" style="padding: 8px 15px; font-size: 0.9rem;">Start a GoFundMe</a>
+    </nav>
+  </header>
+  <main>
+    <div class="container-flex">
+      <section class="campaign-main" style="flex: 1 1 60%;">
+        <h1 class="campaign-title">Help My 4-Year-Old Daughter Sophia Beat Cancer  </h1>
+        <h2 class="campaign-subtitle">Urgent: Her Wilms Tumor treatment costs $35,000 I can’t save her alone.</h2>
+        <img
+          src="photo_2025-07-03_22-04-29.jpg"
+          alt="Sophia"
+          class="campaign-image"
+        />
+        <div class="organizer-info">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          Hi, I’m Chris Steel Sophia’s Dad.  
+        </div>
+        <div class="donation-protected" aria-label="Donation protected">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 1C7.03 1 3 5.03 3 10c0 5.25 7.5 12 9 12s9-6.75 9-12c0-4.97-4.03-9-9-9zm0 17c-1.1 0-2-.9-2-2v-3h4v3c0 1.1-.9 2-2 2z"/>
+          </svg>
+          Donation protected
+        </div>
+        <p class="story">
+           My little girl Sophia Nine Steel is 4 years old. We live in Boise, Idaho. Two weeks ago, our world shattered: Sophia was diagnosed with Wilms Tumor, a rare kidney cancer. Now, I’m begging for your help to save her life.  
+        </p>
+        <p class="story">
+          Sophia is everything to me. She loves painting, unicorns, and chasing our old dog, Buddy, through the fields behind our trailer. She’s the kid who gives “flower presents” (dandelions!) to strangers at the grocery store. Now, instead of playing outside, she’s hooked to IVs, fighting nausea from chemo. She still smiles through it but I’m terrified.  
+        </p>
+        <p class="story">
+          The doctors say she has a high chance of beating this but only if she gets surgery and chemotherapy now. The total cost is $35,000. I work 2 jobs, but medical bills are drowning us. I’ve sold my car, skipped meals, and called every charity but it’s not enough. Insurance won’t cover it all. Last night, I had to choose between her pain medication and our electric bill. <em>No parent should face that.</em>  
+        </p>
+        <p class="story">
+        Here’s what your donation will do:  
+        </p>
+        <ul class="story" style="list-style:none; padding-left: 0;">
+          <li>💉 <strong>Chemotherapy:</strong> <em>$19,000</em> (6 months of treatments to shrink the tumor)</li>
+          <li>🏥 <strong>Surgery:</strong> <em>$11,000</em> (to remove her kidney and the cancer)</li>
+          <li>🚗 <strong>Travel & Meds:</strong> <em>$3,000</em> (driving for treatments, anti-nausea drugs, scans)</li>
+        </ul>
+        <p class="story">
+          I’m not proud to ask but I’d beg on my knees for Sophia. I’m her only parent. Her mom isn’t in the picture. It’s just us, and I <em>will not lose her</em>.  
+        </p>
+        <p class="story">
+        How You Can Help:  
+        </p>
+        <ol class="story" style="padding-left: 20px;">
+          <li><strong>Donate $100, $200 or any amount</strong>every dollar gets her closer to surgery.</li>
+          <li>Share this link on Facebook, Twitter, or at your church.</li>
+          <li><strong>Pray for Sophia</strong>or send good thoughts if that’s your way.</li>
+        </ol>
+        <p class="story">
+          Time is critical. Her chemo started last week, but bills are due now. I promise: <em>Every cent goes to Sophia’s treatment.</em> I’ll post updates here so you see her progress.  
+          <br />#SophiaStrong
+        </p>
+      </section>
+      <aside class="donation-panel" aria-label="Donation panel" style="flex: 1 1 35%;">
+        <div class="donation-stats">
+          <div>
+            <span class="raised" id="raised-amount">$35,150</span> USD raised
+          </div>
+          <div class="goal" id="goal-amount">$55K goal</div>
+          <div class="progress-circle" aria-label="Progress circle">
+            <svg viewBox="0 0 60 60" role="img" aria-hidden="true" focusable="false">
+              <circle class="bg" cx="30" cy="30" r="30"></circle>
+              <circle class="progress" cx="30" cy="30" r="30" stroke-dashoffset="7.54"></circle>
+            </svg>
+            <div class="progress-text" id="progress-text">56%</div>
+          </div>
+        </div>
+        <button class="btn btn-share" aria-label="Share campaign">Share</button>
+        <button class="btn btn-donate" aria-label="Donate now" onclick="window.location.href='donate.html'">Donate now</button>
+        <div class="recent-donations">
+          <a href="#" aria-label="See people who just donated">21 people just donated</a>
+          <ul class="donor-list" aria-live="polite" aria-relevant="additions">
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">william rouse</span>
+              <span class="donation-amount">$50</span>
+              <span class="donation-time">·12 hrs</span>
+              <span class="donation-time">·Poor child</span> 
+            </li>
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">Tracie Gravelle</span>
+              <span class="donation-amount">$2550</span>
+              <span class="donation-time">·8 hrs</span>
+              <span class="donation-time">·My lovely niece</span>
+            </li>
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">Anonymous</span>
+              <span class="donation-amount">$100</span>
+              <span class="donation-time">·9 hrs</span>
+              <span class="donation-time">·I am rooting for you</span>
+            </li>
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">Kate Connor</span>
+              <span class="donation-amount">$1500</span>
+              <span class="donation-time">·3 hrs</span>
+              <span class="donation-time">·Get better baby girl </span>
+            </li>
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">John S.F</span>
+              <span class="donation-amount">$1100</span>
+              <span class="donation-time">·3 hrs</span>
+              <span class="donation-time">·Let's make this work guys </span>
+            </li>
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">Caroline p</span>
+              <span class="donation-amount">$5200</span>
+              <span class="donation-time">·5 hrs</span>
+              <span class="donation-time">·You are a strong girl Sophie</span>
+            </li>
+            <li>
+              <svg class="donor-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span class="donor-name">Carl X Matt</span>
+              <span class="donation-amount">$6200</span>
+              <span class="donation-time">·2 hrs</span>
+              <span class="donation-time">·Daddy and us are rooting for you</span>
+            </li>
+          
+          </ul>
+          <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+            <button aria-label="See all donations" class="btn btn-share" style="font-size: 0.85rem; padding: 6px 12px;" id="see-all-btn">See all donations</button>
+            <button aria-label="See top donations" class="btn btn-share" style="font-size: 0.85rem; padding: 6px 12px;" id="see-top-btn">See top 3 donations</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <footer style="text-align: center; padding: 15px; font-size: 0.9rem; color: #999;">
+    &copy; 2024 GoFundMe Replica. All rights reserved.
+  </footer>
+  <script>
+    // Progress circle calculation
+    const progressCircle = document.querySelector('.progress-circle .progress');
+    const progressText = document.getElementById('progress-text');
+    const raisedAmount = 86150;
+    const goalAmount = 90000;
+    const circumference = 2 * Math.PI * 30; // 2 * PI * r (r=30)
+    const progressPercent = Math.min((raisedAmount / goalAmount) * 100, 100);
+    const offset = circumference - (progressPercent / 100) * circumference;
+    progressCircle.style.strokeDasharray = circumference;
+    progressCircle.style.strokeDashoffset = offset;
+    progressText.textContent = Math.round(progressPercent) + '%';
+
+    // Donation list filtering
+    const seeAllBtn = document.getElementById('see-all-btn');
+    const seeTopBtn = document.getElementById('see-top-btn');
+    const donorList = document.querySelector('.donor-list');
+    const allDonors = Array.from(donorList.querySelectorAll('li'));
+
+    seeAllBtn.addEventListener('click', () => {
+      // Show all donors
+      donorList.innerHTML = '';
+      allDonors.forEach(donor => donorList.appendChild(donor));
+    });
+
+    seeTopBtn.addEventListener('click', () => {
+      // Show top 3 donors by donation amount
+      const sortedDonors = allDonors.slice().sort((a, b) => {
+        const amountA = parseInt(a.querySelector('.donation-amount').textContent.replace(/[^0-9]/g, ''), 10);
+        const amountB = parseInt(b.querySelector('.donation-amount').textContent.replace(/[^0-9]/g, ''), 10);
+        return amountB - amountA;
+      });
+      donorList.innerHTML = '';
+      sortedDonors.slice(0, 3).forEach(donor => donorList.appendChild(donor));
+    });
+  </script>
+</body>
+</html>
