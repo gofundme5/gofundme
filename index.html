@@ -336,7 +336,7 @@
               <circle class="bg" cx="30" cy="30" r="30"></circle>
               <circle class="progress" cx="30" cy="30" r="30" stroke-dashoffset="7.54"></circle>
             </svg>
-            <div class="progress-text" id="progress-text">66%</div>
+            <div class="progress-text" id="progress-text">56%</div>
           </div>
         </div>
         <button class="btn btn-share" aria-label="Share campaign">Share</button>
@@ -431,7 +431,7 @@
     const offset = circumference - (progressPercent / 100) * circumference;
     progressCircle.style.strokeDasharray = circumference;
     progressCircle.style.strokeDashoffset = offset;
-    progressText.textContent = Math.round(progressPercent) + '%';
+    progressText.textContent = '55%';
 
     // Donation list filtering
     const seeAllBtn = document.getElementById('see-all-btn');
